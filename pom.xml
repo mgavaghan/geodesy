@@ -28,9 +28,9 @@
 	</developers>
 	
 	<scm>
-		<connection>scm:git:git://github.com/simpligility/ossrh-demo.git</connection>
-		<developerConnection>scm:git:ssh://github.com:simpligility/ossrh-demo.git</developerConnection>
-		<url>http://github.com/simpligility/ossrh-demo/tree/master</url>
+		<connection>scm:git:git://github.com/mgavaghan/geodesy.git</connection>
+		<developerConnection>scm:git:ssh://github.com:mgavaghan/geodesy.git</developerConnection>
+		<url>http://github.com/mgavaghan/geodesy/tree/master</url>
 	</scm>
 	
 	<properties>
