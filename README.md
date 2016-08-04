@@ -2,16 +2,16 @@
 
 BitCoin tips graciously accepted at `1FB63FYQMy7hpC2ANVhZ5mSgAZEtY1aVLf`
 
-Looking for the C# version of the Geodesy library? [Click here.](http://www.gavaghan.org/blog/2007/08/06/c-gps-receivers-and-geocaching-vincentys-formula/)
+Looking for the C# version of the Geodesy library? [Click here.](http://www.gavaghan.org/blog/2007/08/06/c-gps-receivers-and-geocaching-vincentys-formula/ "Gavaghan C# Geodesy Implementation")
 
-This will be handy for anyone, particularly [Geocachers](https://www.geocaching.com/), interested in developing software for use with a GPS receiver. The library provides two important functions:
+This will be handy for anyone, particularly [Geocachers](https://www.geocaching.com/ "Geocaching"), interested in developing software for use with a GPS receiver. The library provides two important functions:
 
 1. Calculate a destination given a starting point, direction, and distance traveled on Earth
 1. Calculate the distance between two points on Earth
 
 The fancy schmancy names for these functions are the “direct geodetic problem” and the “the inverse geodetic problem”.
 
-For a deeper discussion of the source code, I recommend reading my blog entry: [Java, GPS Receivers, and Geocaching: Vincenty’s Formula](http://www.gavaghan.org/blog/2007/11/16/java-gps-receivers-and-geocaching-vincentys-formula/).
+For a deeper discussion of the source code, I recommend reading my blog entry: [Java, GPS Receivers, and Geocaching: Vincenty’s Formula](http://www.gavaghan.org/blog/2007/11/16/java-gps-receivers-and-geocaching-vincentys-formula/ "Gavaghan Java Geodesy Implementation").
 
 This is the Java source code for implementations of [Thaddeus Vincenty’s algorithms](http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf "Vincenty's algorithm") to solve the direct and inverse geodetic problems.
 
@@ -23,7 +23,7 @@ The primary classes in the library are:
 
 **org.gavaghan.geodesy (2-D calculations)**
 
-`Ellipsoid` – an immutable property class representing a model of Earth used for geodetic calculations. Several static instances are included that describe scientifically measured models. WGS84 (the [1984 World Geodetic System](https://en.wikipedia.org/wiki/WGS84)) and GRS80 (the [1980 Geodetic Reference System](https://en.wikipedia.org/wiki/GRS_80)) are the most widely used.
+`Ellipsoid` – an immutable property class representing a model of Earth used for geodetic calculations. Several static instances are included that describe scientifically measured models. WGS84 (the [1984 World Geodetic System](https://en.wikipedia.org/wiki/WGS84 "WGS84")) and GRS80 (the [1980 Geodetic Reference System](https://en.wikipedia.org/wiki/GRS_80 "GRS80")) are the most widely used.
 
 `GlobalCoordinates` – encapsulates a location on Earth as described by two Angles: latitude and longitude.
 
