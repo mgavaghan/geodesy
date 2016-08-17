@@ -16,3 +16,4 @@ target/
 
 # eclipse files
 .settings/
+.classpath
