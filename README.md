@@ -42,3 +42,13 @@ The primary classes in the library are:
 **org.gavaghan.geodesy.example**
 
 This is an application project that sets up and computes a direct calculation and a 2-D and 3-D inverse calculation. This is a good starting point for figuring out how to use the library.
+
+# Maven Dependency
+
+This is available at the Maven Central Repository using this dependency setting:
+
+    <dependency>
+        <groupId>org.gavaghan</groupId>
+        <artifactId>geodesy</artifactId>
+        <version>1.1.3</version>
+    </dependency>
