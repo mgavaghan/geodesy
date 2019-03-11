@@ -23,10 +23,13 @@
  */
 package org.gavaghan.geodesy;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
-public class GeodeticCalculatorTest extends TestCase
+import org.junit.Test;
+
+public class GeodeticCalculatorTest
 {
+   @Test
    public void testCalculateGeodeticCurve()
    {
       // instantiate the calculator
@@ -51,6 +54,7 @@ public class GeodeticCalculatorTest extends TestCase
       assertEquals(291.75529334, geoCurve.getReverseAzimuth(), 0.0000001);
    }
 
+   @Test
    public void testCalculateGeodeticMeasurement()
    {
       // instantiate the calculator
@@ -79,6 +83,7 @@ public class GeodeticCalculatorTest extends TestCase
       assertEquals( 80.38029386, geoMeasurement.getReverseAzimuth(), 0.0000001);
    }
 
+   @Test
    public void testAntiPodal1()
    {
       // instantiate the calculator
@@ -105,6 +110,7 @@ public class GeodeticCalculatorTest extends TestCase
       assertEquals(270.0004877491174, geoCurve.getReverseAzimuth(), 0.0000001);
    }
 
+   @Test
    public void testAntiPodal2()
    {
       // instantiate the calculator
@@ -131,6 +137,7 @@ public class GeodeticCalculatorTest extends TestCase
       assertEquals(0.0, geoCurve.getReverseAzimuth(), 0.0000001);
    }
 
+   @Test
    public void testInverseWithDirect()
    {
       // instantiate the calculator
@@ -159,7 +166,8 @@ public class GeodeticCalculatorTest extends TestCase
       assertEquals( eiffelTower.getLatitude(), dest.getLatitude(), 0.0000001 );
       assertEquals( eiffelTower.getLongitude(), dest.getLongitude(), 0.0000001 );
    }
-   
+
+   @Test
    public void testPoleCrossing()
    {
      // instantiate the calculator
