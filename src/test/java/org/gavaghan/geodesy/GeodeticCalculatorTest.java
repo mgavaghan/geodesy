@@ -194,4 +194,47 @@ public class GeodeticCalculatorTest
      assertEquals(expected.getLatitude(), dest.getLatitude(), 0.0000001);
      assertEquals(expected.getLongitude(), dest.getLongitude(), 0.0000001);
    }
+
+   @Test(timeout=1000)
+   public void testStrangeValues()
+   {
+      // instantiate the calculator
+      GeodeticCalculator geoCalc = new GeodeticCalculator();
+
+      // select a reference elllipsoid
+      Ellipsoid reference = Ellipsoid.WGS84;
+
+      // set Lincoln Memorial coordinates
+      GlobalCoordinates lincolnMemorial;
+      lincolnMemorial = new GlobalCoordinates(38.88922, -77.04978);
+
+      // set NaN coordinates
+      GlobalCoordinates nanCoords;
+      nanCoords = new GlobalCoordinates(Double.NaN, Double.NaN);
+
+      // set infinite coordinates
+      GlobalCoordinates infCoords;
+      infCoords = new GlobalCoordinates(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY);
+
+      geoCalc.calculateGeodeticCurve(reference, lincolnMemorial, nanCoords);
+      geoCalc.calculateGeodeticCurve(reference, nanCoords, lincolnMemorial);
+      geoCalc.calculateGeodeticCurve(reference, nanCoords, nanCoords);
+      geoCalc.calculateGeodeticCurve(reference, lincolnMemorial, infCoords);
+      geoCalc.calculateGeodeticCurve(reference, infCoords, infCoords);
+      
+      geoCalc.calculateEndingGlobalCoordinates(reference, lincolnMemorial, 0, 0);
+      geoCalc.calculateEndingGlobalCoordinates(reference, lincolnMemorial, 0, 0);
+      geoCalc.calculateEndingGlobalCoordinates(reference, lincolnMemorial, Double.NaN, 0);
+      geoCalc.calculateEndingGlobalCoordinates(reference, lincolnMemorial, 0, Double.NaN);
+      geoCalc.calculateEndingGlobalCoordinates(reference, lincolnMemorial, Double.NaN, Double.NaN);
+      
+      geoCalc.calculateEndingGlobalCoordinates(reference, nanCoords, 0, 0);
+      geoCalc.calculateEndingGlobalCoordinates(reference, nanCoords, Double.NaN, 0);
+      geoCalc.calculateEndingGlobalCoordinates(reference, nanCoords, 0, Double.NaN);
+      geoCalc.calculateEndingGlobalCoordinates(reference, nanCoords, Double.NaN, Double.NaN);
+
+      geoCalc.calculateEndingGlobalCoordinates(reference, lincolnMemorial, 0, Double.POSITIVE_INFINITY);
+      geoCalc.calculateEndingGlobalCoordinates(reference, lincolnMemorial, 0, Double.NEGATIVE_INFINITY);
+      geoCalc.calculateEndingGlobalCoordinates(reference, lincolnMemorial, Double.POSITIVE_INFINITY, 1);
+   }
 }
