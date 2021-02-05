@@ -97,7 +97,7 @@ public class GeodeticCalculator
 		double cosSigmaM2;
 		double cos2SigmaM2;
 
-		for (;;)
+		while (!Double.isNaN(prevSigma))
 		{
 			// eq. 5
 			sigmaM2 = 2.0 * sigma1 + sigma;

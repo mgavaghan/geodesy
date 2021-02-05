@@ -23,10 +23,13 @@
  */
 package org.gavaghan.geodesy;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
 
-public class GeodeticCalculatorTest extends TestCase
+import org.junit.Test;
+
+public class GeodeticCalculatorTest
 {
+   @Test
    public void testCalculateGeodeticCurve()
    {
       // instantiate the calculator
@@ -51,6 +54,7 @@ public class GeodeticCalculatorTest extends TestCase
       assertEquals(291.75529334, geoCurve.getReverseAzimuth(), 0.0000001);
    }
 
+   @Test
    public void testCalculateGeodeticMeasurement()
    {
       // instantiate the calculator
@@ -79,6 +83,7 @@ public class GeodeticCalculatorTest extends TestCase
       assertEquals( 80.38029386, geoMeasurement.getReverseAzimuth(), 0.0000001);
    }
 
+   @Test
    public void testAntiPodal1()
    {
       // instantiate the calculator
@@ -105,6 +110,7 @@ public class GeodeticCalculatorTest extends TestCase
       assertEquals(270.0004877491174, geoCurve.getReverseAzimuth(), 0.0000001);
    }
 
+   @Test
    public void testAntiPodal2()
    {
       // instantiate the calculator
@@ -131,6 +137,7 @@ public class GeodeticCalculatorTest extends TestCase
       assertEquals(0.0, geoCurve.getReverseAzimuth(), 0.0000001);
    }
 
+   @Test
    public void testInverseWithDirect()
    {
       // instantiate the calculator
@@ -159,7 +166,8 @@ public class GeodeticCalculatorTest extends TestCase
       assertEquals( eiffelTower.getLatitude(), dest.getLatitude(), 0.0000001 );
       assertEquals( eiffelTower.getLongitude(), dest.getLongitude(), 0.0000001 );
    }
-   
+
+   @Test
    public void testPoleCrossing()
    {
      // instantiate the calculator
@@ -185,5 +193,48 @@ public class GeodeticCalculatorTest extends TestCase
 
      assertEquals(expected.getLatitude(), dest.getLatitude(), 0.0000001);
      assertEquals(expected.getLongitude(), dest.getLongitude(), 0.0000001);
+   }
+
+   @Test(timeout=1000)
+   public void testStrangeValues()
+   {
+      // instantiate the calculator
+      GeodeticCalculator geoCalc = new GeodeticCalculator();
+
+      // select a reference elllipsoid
+      Ellipsoid reference = Ellipsoid.WGS84;
+
+      // set Lincoln Memorial coordinates
+      GlobalCoordinates lincolnMemorial;
+      lincolnMemorial = new GlobalCoordinates(38.88922, -77.04978);
+
+      // set NaN coordinates
+      GlobalCoordinates nanCoords;
+      nanCoords = new GlobalCoordinates(Double.NaN, Double.NaN);
+
+      // set infinite coordinates
+      GlobalCoordinates infCoords;
+      infCoords = new GlobalCoordinates(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY);
+
+      geoCalc.calculateGeodeticCurve(reference, lincolnMemorial, nanCoords);
+      geoCalc.calculateGeodeticCurve(reference, nanCoords, lincolnMemorial);
+      geoCalc.calculateGeodeticCurve(reference, nanCoords, nanCoords);
+      geoCalc.calculateGeodeticCurve(reference, lincolnMemorial, infCoords);
+      geoCalc.calculateGeodeticCurve(reference, infCoords, infCoords);
+      
+      geoCalc.calculateEndingGlobalCoordinates(reference, lincolnMemorial, 0, 0);
+      geoCalc.calculateEndingGlobalCoordinates(reference, lincolnMemorial, 0, 0);
+      geoCalc.calculateEndingGlobalCoordinates(reference, lincolnMemorial, Double.NaN, 0);
+      geoCalc.calculateEndingGlobalCoordinates(reference, lincolnMemorial, 0, Double.NaN);
+      geoCalc.calculateEndingGlobalCoordinates(reference, lincolnMemorial, Double.NaN, Double.NaN);
+      
+      geoCalc.calculateEndingGlobalCoordinates(reference, nanCoords, 0, 0);
+      geoCalc.calculateEndingGlobalCoordinates(reference, nanCoords, Double.NaN, 0);
+      geoCalc.calculateEndingGlobalCoordinates(reference, nanCoords, 0, Double.NaN);
+      geoCalc.calculateEndingGlobalCoordinates(reference, nanCoords, Double.NaN, Double.NaN);
+
+      geoCalc.calculateEndingGlobalCoordinates(reference, lincolnMemorial, 0, Double.POSITIVE_INFINITY);
+      geoCalc.calculateEndingGlobalCoordinates(reference, lincolnMemorial, 0, Double.NEGATIVE_INFINITY);
+      geoCalc.calculateEndingGlobalCoordinates(reference, lincolnMemorial, Double.POSITIVE_INFINITY, 1);
    }
 }
